@@ -19,3 +19,9 @@ function isAuth() : void {
         header('Location: /');
     }
 }
+
+function checkSession() {
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+}

@@ -5,7 +5,7 @@
         <p class="descripcion-pagina">Crea tu cuenta en UpTask</p>
         <?php include_once __DIR__ . "/../templates/alertas.php"; ?>
 
-        <form class="formulario" method="POST" action="/crear">
+        <form class="formulario" method="POST" action="/crear" novalidate>
             <div class="campo">
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Tu Nombre" value="<?php echo $usuario->nombre; ?>">
