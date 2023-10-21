@@ -10,6 +10,8 @@ class LoginController
 {
     public static function login(Router $router)
     {
+        checkAuth();
+
         $alertas = [];
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -28,7 +30,7 @@ class LoginController
                     if (password_verify($_POST["password"], $usuario->password)) {
                         // Iniciar la sesión
                         checkSession();
-                        $_SESSION["id"] = $usuario->id; 
+                        $_SESSION["id"] = $usuario->id;
                         $_SESSION["nombre"] = $usuario->nombre;
                         $_SESSION["email"] = $usuario->email;
                         $_SESSION["login"] = true;
@@ -62,6 +64,8 @@ class LoginController
 
     public static function crear(Router $router)
     {
+        checkAuth();
+
         $usuario = new Usuario();
         $alertas = [];
 
@@ -109,6 +113,8 @@ class LoginController
 
     public static function olvide(Router $router)
     {
+        checkAuth();
+
         $alertas = [];
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -150,6 +156,8 @@ class LoginController
 
     public static function reestablecer(Router $router)
     {
+        checkAuth();
+
         $token = s($_GET["token"]);
         $mostrar = true;
 
@@ -199,6 +207,8 @@ class LoginController
 
     public static function mensaje(Router $router)
     {
+        checkAuth();
+
         $router->render("auth/mensaje", [
             "titulo" => "Cuenta Creada Existosamente"
         ]);
@@ -206,6 +216,8 @@ class LoginController
 
     public static function confirmar(Router $router)
     {
+        checkAuth();
+
         $token = s($_GET["token"]);
 
         if (!$token) header("Location: /");
@@ -221,7 +233,7 @@ class LoginController
             $usuario->confirmado = 1;
             $usuario->token = null;
             unset($usuario->password2);
-            
+
             // Guardar en la base de datos
             $usuario->guardar();
 
