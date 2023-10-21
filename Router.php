@@ -19,6 +19,7 @@ class Router
 
     public function comprobarRutas()
     {
+        session_start();
 
         $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
         $method = $_SERVER['REQUEST_METHOD'];
