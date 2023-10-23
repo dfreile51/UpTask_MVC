@@ -1,0 +1,11 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.sweet-container {
+    font-size: 1.6rem;
+    width: 33rem;
+}
+
+.sweet-container-success {
+    font-size: 1.6rem;
+}

@@ -67,6 +67,9 @@
       btnEliminarTarea.classList.add("eliminar-tarea");
       btnEliminarTarea.dataset.idTarea = id;
       btnEliminarTarea.textContent = "Eliminar";
+      btnEliminarTarea.ondblclick = function () {
+        confirmarEliminarTarea({ ...tarea });
+      };
 
       opcionesDiv.appendChild(btnEstadoTarea);
       opcionesDiv.appendChild(btnEliminarTarea);
@@ -248,6 +251,64 @@
           return tareaMemoria;
         });
 
+        mostrarTareas();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function confirmarEliminarTarea(tarea) {
+    Swal.fire({
+      title: "¿Eliminar Tarea?",
+      showCancelButton: true,
+      confirmButtonText: "Si",
+      cancelButtonText: "No",
+      customClass: {
+        popup: "sweet-container",
+      },
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        eliminarTarea(tarea);
+      }
+    });
+  }
+
+  async function eliminarTarea(tarea) {
+    const { estado, id, nombre } = tarea;
+
+    const datos = new FormData();
+    datos.append("id", id);
+    datos.append("nombre", nombre);
+    datos.append("estado", estado);
+    datos.append("proyectoId", obtenerProyecto());
+
+    try {
+      const url = `${location.origin}/api/tarea/eliminar`;
+      const respuesta = await fetch(url, {
+        method: "POST",
+        body: datos,
+      });
+      const resultado = await respuesta.json();
+
+      if (resultado.resultado) {
+        // mostrarAlerta(
+        //   resultado.mensaje,
+        //   resultado.tipo,
+        //   document.querySelector(".contenedor-nueva-tarea")
+        // );
+
+        Swal.fire({
+          title: "Eliminado!",
+          text: resultado.mensaje,
+          icon: "success",
+          customClass: {
+            popup: "sweet-container-success"
+          }
+        });
+
+        tareas = tareas.filter((tareaMemoria) => tareaMemoria.id !== tarea.id);
         mostrarTareas();
       }
     } catch (error) {
