@@ -59,6 +59,9 @@
       btnEstadoTarea.classList.add(`${estados[estado].toLowerCase()}`);
       btnEstadoTarea.textContent = estados[estado];
       btnEstadoTarea.dataset.estadoTarea = estado;
+      btnEstadoTarea.ondblclick = function () {
+        cambiarEstadoTarea({ ...tarea });
+      };
 
       const btnEliminarTarea = document.createElement("BUTTON");
       btnEliminarTarea.classList.add("eliminar-tarea");
@@ -173,7 +176,6 @@
       });
 
       const resultado = await respuesta.json();
-      console.log(resultado);
 
       mostrarAlerta(
         resultado.mensaje,
@@ -192,10 +194,60 @@
           id: String(resultado.id),
           nombre: tarea,
           estado: "0",
-          proyectoId: resultado.proyectoId
-        }
+          proyectoId: resultado.proyectoId,
+        };
 
         tareas = [...tareas, tareaObj];
+        mostrarTareas();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function cambiarEstadoTarea(tarea) {
+    const nuevoEstado = tarea.estado === "1" ? "0" : "1";
+    tarea.estado = nuevoEstado;
+    actualizarTarea(tarea);
+  }
+
+  async function actualizarTarea(tarea) {
+    const { estado, id, nombre } = tarea;
+
+    const datos = new FormData();
+    datos.append("id", id);
+    datos.append("nombre", nombre);
+    datos.append("estado", estado);
+    datos.append("proyectoId", obtenerProyecto());
+
+    // for (let valor of datos.values()) {
+    //   console.log(valor);
+    // }
+
+    try {
+      const url = `${location.origin}/api/tarea/actualizar`;
+
+      const respuesta = await fetch(url, {
+        method: "POST",
+        body: datos,
+      });
+      const resultado = await respuesta.json();
+
+      if (resultado.respuesta.tipo === "exito") {
+        mostrarAlerta(
+          resultado.respuesta.mensaje,
+          resultado.respuesta.tipo,
+          document.querySelector(".contenedor-nueva-tarea")
+        );
+
+        tareas = tareas.map((tareaMemoria) => {
+          if (tareaMemoria.id === id) {
+            tareaMemoria.estado = estado;
+          }
+
+          return tareaMemoria;
+        });
+
         mostrarTareas();
       }
     } catch (error) {
@@ -212,9 +264,9 @@
 
   function limpiarTareas() {
     const contenedorTareas = document.querySelector("#listado-tareas");
-    
-    while(contenedorTareas.firstChild) {
-      contenedorTareas.removeChild(contenedorTareas.firstChild)
+
+    while (contenedorTareas.firstChild) {
+      contenedorTareas.removeChild(contenedorTareas.firstChild);
     }
   }
 })();
