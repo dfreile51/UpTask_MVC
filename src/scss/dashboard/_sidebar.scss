@@ -2,8 +2,13 @@
 @use "base/mixins" as m;
 
 .sidebar {
+  display: none;
   background-color: v.$indigo;
   padding: 2rem;
+
+  @include m.tablet {
+    display: block;
+  }
 
   h2 {
     color: v.$blanco;
@@ -12,24 +17,6 @@
   }
 
   .sidebar-nav {
-    margin-top: 5rem;
-
-    a {
-      color: v.$blanco;
-      display: block;
-      margin-bottom: 1rem;
-      padding: 0.7rem;
-      transition-property: background-color;
-      transition-duration: 300ms;
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 1.2rem;
-
-      &:hover,
-      &.activo {
-        background-color: darken(v.$indigo, 20%);
-        border-radius: 0.5rem;
-      }
-    }
+    @include m.sidebarNav(5rem 0 0 0, 1rem, 0.7rem);
   }
 }

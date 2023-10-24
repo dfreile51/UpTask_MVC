@@ -60,3 +60,30 @@
     font-size: 10rem;
   }
 }
+
+@mixin sidebarNav($margin, $marginBottom, $padding, $fontSize: 1.2rem, $paddingGlobal: 0) {
+    margin: $margin;
+    padding: $paddingGlobal;
+
+    a {
+      color: v.$blanco;
+      display: block;
+      margin-bottom: $marginBottom;
+      padding: $padding;
+      transition-property: background-color;
+      transition-duration: 300ms;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: $fontSize;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      &:hover,
+      &.activo {
+        background-color: darken(v.$indigo, 20%);
+        border-radius: 0.5rem;
+      }
+    }
+}

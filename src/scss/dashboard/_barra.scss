@@ -1,31 +1,125 @@
 @use "base/variables" as v;
 @use "base/mixins" as m;
 
-.barra {
-    background-color: v.$blanco;
-    padding: 1rem 2rem;
-    box-shadow: 1px 12px 9px -13px rgba(0, 0 ,0, .4);
+.barra-mobile {
+  background-color: v.$indigo;
+  padding: 2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    @include m.tablet {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+  @include m.tablet {
+    display: none;
+  }
+
+  h1 {
+    color: v.$blanco;
+    margin: 0;
+  }
+
+  .menu {
+    .abierta {
+      width: 2rem;
     }
 
-    p {
-        margin: 0;
-        font-size: 1.4rem;
-
-        span {
-            font-weight: 700;
-            color: v.$indigo;
-        }
+    .cerrada {
+      width: 0.8rem;
     }
+
+    .abierta,
+    .cerrada {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.barra-mobile-options {
+  background-color: v.$indigo;
+
+  &.hidden {
+    display: none;
+  }
+
+  &.mostrar {
+    overflow: hidden;
+    animation-name: myAnimation2;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+  }
+
+  &.ocultar {
+    overflow: hidden;
+    animation-name: myAnimation;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+  }
+
+  .sidebar-nav {
+    @include m.sidebarNav(0, 0.5rem, 1.4rem 1.6rem, 1.4rem, 1rem);
+  }
+
+  .cerrar-sesion-mobile {
+    margin-top: 10rem;
+    padding: 0 1rem 1rem 1rem;
 
     .cerrar-sesion {
-        @include m.boton(darken(v.$indigo, 20%), v.$blanco);
-        font-size: 1.2rem;
-        padding: 1rem;
-        border-radius: .5rem;
+      @include m.boton(v.$naranja, v.$blanco);
     }
+  }
+}
+
+.barra {
+  display: none;
+
+  @include m.tablet {
+    background-color: v.$blanco;
+    padding: 1rem 2rem;
+    box-shadow: 1px 12px 9px -13px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.4rem;
+
+    span {
+      font-weight: 700;
+      color: v.$indigo;
+    }
+  }
+
+  .cerrar-sesion {
+    @include m.boton(darken(v.$indigo, 20%), v.$blanco);
+    font-size: 1.2rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+}
+
+@keyframes myAnimation {
+  from {
+    display: block;
+    height: 321px;
+  }
+  to {
+    display: none;
+    height: 0px;
+  }
+}
+
+@keyframes myAnimation2 {
+  from {
+    display: none;
+    height: 0px;
+  }
+  to {
+    display: block;
+    height: 321px;
+  }
 }
