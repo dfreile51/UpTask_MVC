@@ -13,12 +13,12 @@ class DashboardController
         checkSession();
         isAuth();
 
-        $id = $_SESSION["id"];
-        $proyectos = Proyecto::belongsTo("propietarioId", $id);
+        // $id = $_SESSION["id"];
+        // $proyectos = Proyecto::belongsTo("propietarioId", $id);
 
         $router->render("dashboard/index", [
             "titulo" => "Proyectos",
-            "proyectos" => $proyectos
+            // "proyectos" => $proyectos
         ]);
     }
 
@@ -61,7 +61,6 @@ class DashboardController
     public static function proyecto(Router $router)
     {
         checkSession();
-
         isAuth();
 
         $token = $_GET["id"];

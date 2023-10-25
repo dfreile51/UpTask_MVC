@@ -30,13 +30,39 @@
     padding: 2rem;
     line-height: 2;
     border-radius: 0.5rem;
+    position: relative;
 
-    &:hover {
-      background-color: darken(v.$indigo, 5%);
-    }
+    // &:hover {
+    //   background-color: darken(v.$indigo, 5%);
+    // }
 
     a {
       color: v.$blanco;
+    }
+
+    button {
+      padding: 0;
+      border: none;
+      display: flex;
+      position: absolute;
+      top: -0.5rem;
+      right: -0.5rem;
+      transition-property: background-color;
+      transition-duration: 0.3s;
+      border-radius: 50%;
+      background-color: lighten(v.$rojo, 20%);
+
+      &:hover {
+        cursor: pointer;
+        background-color: v.$rojo;
+      }
+
+      img {
+        width: 3rem;
+        height: 3rem;
+        filter: invert(100%) sepia(0%) saturate(7493%) hue-rotate(336deg)
+          brightness(106%) contrast(102%);
+      }
     }
   }
 }

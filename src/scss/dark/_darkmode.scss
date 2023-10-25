@@ -6,6 +6,10 @@
 
   body {
     background-color: $grisOscuro;
+
+    &.dashboard-background {
+      background-color: $grisOscuro;
+    }
   }
 
   .tagline,
@@ -108,9 +112,9 @@
   .listado-proyectos .proyecto {
     background-color: lighten($grisOscuro, 20%);
 
-    &:hover {
-      background-color: lighten($grisOscuro, 15%);
-    }
+    // &:hover {
+    //   background-color: lighten($grisOscuro, 15%);
+    // }
   }
 
   .listado-tareas .tarea {
