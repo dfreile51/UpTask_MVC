@@ -1,9 +1,5 @@
 <aside class="sidebar">
     <h2>Uptask</h2>
 
-    <nav class="sidebar-nav">
-        <a class="<?php echo ($titulo === "Proyectos") ? "activo" : ""; ?>" href="/dashboard">Proyectos</a>
-        <a class="<?php echo ($titulo === "Crear Proyecto") ? "activo" : ""; ?>" href="/crear-proyecto">Crear Proyectos</a>
-        <a class="<?php echo ($titulo === "Perfil") ? "activo" : ""; ?>" href="/perfil">Perfil</a>
-    </nav>
+    <?php include __DIR__ . "/nav-sidebar.php" ?>
 </aside>
