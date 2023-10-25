@@ -187,7 +187,7 @@
       if (e.target.classList.contains("submit-nueva-tarea")) {
         const nombreTarea = document.querySelector("#tarea").value.trim();
 
-        if (tarea === "") {
+        if (nombreTarea === "") {
           // Mostrar una alerta de error
           mostrarAlerta(
             "El Nombre de la tarea es Obligatorio",
