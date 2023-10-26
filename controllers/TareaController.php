@@ -103,7 +103,7 @@ class TareaController
             if (!$proyecto || $proyecto->propietarioId !== $_SESSION["id"]) {
                 $respuesta = [
                     "tipo" => "error",
-                    "mensaje" => "Hubo un error al actualizar la tarea"
+                    "mensaje" => "Hubo un error al eliminar la tarea"
                 ];
 
                 echo json_encode($respuesta);

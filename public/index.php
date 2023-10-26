@@ -48,6 +48,7 @@ $router->post("/api/tarea/eliminar", [TareaController::class, "eliminar"]);
 
 // API para los proyectos
 $router->get("/api/proyectos", [ProyectoController::class, "index"]);
+$router->post("/api/proyecto/eliminar", [ProyectoController::class, "eliminar"]);
 
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador

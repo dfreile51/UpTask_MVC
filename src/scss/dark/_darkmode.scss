@@ -22,7 +22,8 @@
 
   .descripcion-pagina,
   .formulario .campo input,
-  .nombre-pagina {
+  .nombre-pagina,
+  .no-tareas {
     color: darken(v.$grisClaro, 15%);
   }
 
@@ -33,7 +34,7 @@
     color: v.$blanco;
 
     &::placeholder {
-        color: darken(v.$grisClaro, 20%);
+      color: darken(v.$grisClaro, 20%);
     }
   }
 
@@ -70,9 +71,9 @@
     }
 
     .cerrar-sesion {
-        @include m.boton(v.$naranja, v.$blanco);
-        padding: 1rem;
-        font-size: 1.2rem;
+      @include m.boton(v.$naranja, v.$blanco);
+      padding: 1rem;
+      font-size: 1.2rem;
     }
   }
 
@@ -129,7 +130,7 @@
   .modal .formulario {
     background-color: $grisOscuro;
     legend {
-        color: v.$grisClaro;
+      color: v.$grisClaro;
     }
   }
 }
